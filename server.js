@@ -1,17 +1,22 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser =  require('body-parser');
 
 const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
 
 const app = express();
-//db config
 
+//body parser middleware 
+app.use(bodyParser.urlencoded({extended : false}));
+app.use(bodyParser.json());
+
+//db config
 const db = require('./config/keys').mongoURI;
 
 //connect to mongo db
-//returns promise here
+//returns promise 
 mongoose.connect(db)
     .then(()=>console.log('mongodb connected'))
     .catch((err)=>console.log(err));
