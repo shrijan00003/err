@@ -1,10 +1,19 @@
-const express  =  require('express');
+const express = require('express');
+const mongoose = require('mongoose');
 
-const app =  express();
+const app = express();
+//db config
+
+const db = require('./config/keys').mongoURI;
+
+//connect to mongo db
+//returns promise here
+mongoose.connect(db)
+    .then(()=>console.log('mongodb connected'))
+    .catch((err)=>console.log(err));
 
 //route 
-
-app.get('/', (req,res) => {
+app.get('/', (req, res) => {
     res.send('Hello Everyone !');
 })
 
